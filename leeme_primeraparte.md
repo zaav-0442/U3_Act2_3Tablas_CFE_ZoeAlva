@@ -363,3 +363,305 @@ http://127.0.0.1:8042/
 ---
 
 ¿Quieres que ahora te genere los **archivos HTML completos** (base.html, navbar.html, inicio.html y los de sucursal) con los estilos y menús descritos?
+
+
+
+Excelente ✅ — a continuación te dejo **todos los archivos HTML completos** con diseño moderno, colores suaves y usando **Bootstrap 5**.
+Incluyen la estructura de navegación, pie de página, submenús y las páginas CRUD para **Sucursal**.
+*(No hay validación de datos, como pediste.)*
+
+---
+
+## 📁 Estructura de carpetas
+
+```
+app_CFE/
+ └── templates/
+      ├── base.html
+      ├── header.html
+      ├── navbar.html
+      ├── footer.html
+      ├── inicio.html
+      └── sucursal/
+           ├── agregar_sucursal.html
+           ├── ver_sucursales.html
+           ├── actualizar_sucursal.html
+           └── borrar_sucursal.html
+```
+
+---
+
+## 🧱 base.html
+
+```html
+{% include 'header.html' %}
+<body>
+    {% include 'navbar.html' %}
+    <main class="container mt-4 mb-5">
+        {% block content %}
+        {% endblock %}
+    </main>
+    {% include 'footer.html' %}
+</body>
+</html>
+```
+
+---
+
+## 🧩 header.html
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Administración CFE</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Íconos de Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #212529;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        footer {
+            background-color: #004d40;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        nav.navbar {
+            background-color: #00695c;
+        }
+        nav a.nav-link, nav .navbar-brand {
+            color: white !important;
+        }
+        nav a.nav-link:hover {
+            background-color: #004d40;
+        }
+        .btn-custom {
+            background-color: #26a69a;
+            color: white;
+        }
+        .btn-custom:hover {
+            background-color: #00897b;
+        }
+        .card {
+            border-radius: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+```
+
+---
+
+## 🧭 navbar.html
+
+```html
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" href="{% url 'inicio_cfe' %}">
+      <i class="bi bi-lightning-charge-fill"></i> Sistema de Administración CFE
+    </a>
+    <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCFE">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCFE">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="{% url 'inicio_cfe' %}"><i class="bi bi-house-door-fill"></i> Inicio</a></li>
+        <!-- Menú Sucursales -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="sucursalesDropdown" role="button" data-bs-toggle="dropdown">
+            <i class="bi bi-building"></i> Sucursales
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'agregar_sucursal' %}">Agregar Sucursal</a></li>
+            <li><a class="dropdown-item" href="{% url 'ver_sucursales' %}">Ver Sucursales</a></li>
+          </ul>
+        </li>
+        <!-- Menú Empleados -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="empleadosDropdown" role="button" data-bs-toggle="dropdown">
+            <i class="bi bi-person-badge"></i> Empleados
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Agregar Empleado</a></li>
+            <li><a class="dropdown-item" href="#">Ver Empleados</a></li>
+            <li><a class="dropdown-item" href="#">Actualizar Empleado</a></li>
+            <li><a class="dropdown-item" href="#">Borrar Empleado</a></li>
+          </ul>
+        </li>
+        <!-- Menú Domicilios -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="domiciliosDropdown" role="button" data-bs-toggle="dropdown">
+            <i class="bi bi-geo-alt-fill"></i> Domicilios
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Agregar Domicilio</a></li>
+            <li><a class="dropdown-item" href="#">Ver Domicilios</a></li>
+            <li><a class="dropdown-item" href="#">Actualizar Domicilio</a></li>
+            <li><a class="dropdown-item" href="#">Borrar Domicilio</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+```
+
+---
+
+## 🦶 footer.html
+
+```html
+<footer>
+  © {{ now|date:"Y" }} Comisión Federal de Electricidad — Creado por Zoé Alva, CBTIS 128
+</footer>
+```
+
+---
+
+## 🏠 inicio.html
+
+```html
+{% extends 'base.html' %}
+{% block content %}
+<div class="text-center">
+    <h1 class="fw-bold text-success">Bienvenido al Sistema de Administración CFE</h1>
+    <p class="lead mt-3">Administra sucursales, empleados y domicilios de la Comisión Federal de Electricidad.</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Logo_de_la_CFE.svg" alt="CFE" class="img-fluid mt-4" style="max-height:200px;">
+</div>
+{% endblock %}
+```
+
+---
+
+## 🏢 sucursal/agregar_sucursal.html
+
+```html
+{% extends 'base.html' %}
+{% block content %}
+<div class="card p-4">
+  <h3 class="text-center text-success mb-3">Agregar Nueva Sucursal</h3>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="row g-3">
+      <div class="col-md-6"><input type="text" name="nombre" class="form-control" placeholder="Nombre"></div>
+      <div class="col-md-6"><input type="text" name="clave" class="form-control" placeholder="Clave"></div>
+      <div class="col-md-12"><input type="text" name="direccion" class="form-control" placeholder="Dirección"></div>
+      <div class="col-md-6"><input type="text" name="telefono" class="form-control" placeholder="Teléfono"></div>
+      <div class="col-md-6"><input type="text" name="ciudad" class="form-control" placeholder="Ciudad"></div>
+      <div class="col-md-6"><input type="text" name="estado" class="form-control" placeholder="Estado"></div>
+      <div class="col-md-6"><input type="date" name="fecha_apertura" class="form-control"></div>
+    </div>
+    <div class="text-center mt-4">
+      <button class="btn btn-custom px-5">Guardar</button>
+    </div>
+  </form>
+</div>
+{% endblock %}
+```
+
+---
+
+## 📋 sucursal/ver_sucursales.html
+
+```html
+{% extends 'base.html' %}
+{% block content %}
+<h3 class="text-success text-center mb-4">Listado de Sucursales</h3>
+<table class="table table-striped table-hover">
+  <thead class="table-success">
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Clave</th>
+      <th>Ciudad</th>
+      <th>Estado</th>
+      <th>Teléfono</th>
+      <th>Fecha Apertura</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for s in sucursales %}
+    <tr>
+      <td>{{ s.id }}</td>
+      <td>{{ s.nombre }}</td>
+      <td>{{ s.clave }}</td>
+      <td>{{ s.ciudad }}</td>
+      <td>{{ s.estado }}</td>
+      <td>{{ s.telefono }}</td>
+      <td>{{ s.fecha_apertura }}</td>
+      <td>
+        <a href="{% url 'actualizar_sucursal' s.id %}" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
+        <a href="{% url 'borrar_sucursal' s.id %}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="8" class="text-center">No hay sucursales registradas.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+```
+
+---
+
+## ✏️ sucursal/actualizar_sucursal.html
+
+```html
+{% extends 'base.html' %}
+{% block content %}
+<div class="card p-4">
+  <h3 class="text-center text-success mb-3">Actualizar Sucursal</h3>
+  <form method="POST" action="{% url 'realizar_actualizacion_sucursal' sucursal.id %}">
+    {% csrf_token %}
+    <div class="row g-3">
+      <div class="col-md-6"><input type="text" name="nombre" class="form-control" value="{{ sucursal.nombre }}"></div>
+      <div class="col-md-6"><input type="text" name="clave" class="form-control" value="{{ sucursal.clave }}"></div>
+      <div class="col-md-12"><input type="text" name="direccion" class="form-control" value="{{ sucursal.direccion }}"></div>
+      <div class="col-md-6"><input type="text" name="telefono" class="form-control" value="{{ sucursal.telefono }}"></div>
+      <div class="col-md-6"><input type="text" name="ciudad" class="form-control" value="{{ sucursal.ciudad }}"></div>
+      <div class="col-md-6"><input type="text" name="estado" class="form-control" value="{{ sucursal.estado }}"></div>
+      <div class="col-md-6"><input type="date" name="fecha_apertura" class="form-control" value="{{ sucursal.fecha_apertura|date:'Y-m-d' }}"></div>
+    </div>
+    <div class="text-center mt-4">
+      <button class="btn btn-custom px-5">Actualizar</button>
+    </div>
+  </form>
+</div>
+{% endblock %}
+```
+
+---
+
+## 🗑️ sucursal/borrar_sucursal.html
+
+```html
+{% extends 'base.html' %}
+{% block content %}
+<div class="text-center">
+  <h3 class="text-danger">¿Seguro que deseas eliminar esta sucursal?</h3>
+  <p><strong>{{ sucursal.nombre }}</strong></p>
+  <a href="{% url 'ver_sucursales' %}" class="btn btn-secondary">Cancelar</a>
+  <a href="{% url 'borrar_sucursal' sucursal.id %}" class="btn btn-danger">Eliminar</a>
+</div>
+{% endblock %}
+```
+
+---
+
+💡 **Listo:** con estos archivos y tu `views.py`, `urls.py` y configuraciones, tu sistema CFE ya está **funcional para CRUD de Sucursales** en el puerto `8042`.
+
+---
+
