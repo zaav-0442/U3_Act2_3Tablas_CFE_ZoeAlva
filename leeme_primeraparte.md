@@ -274,7 +274,7 @@ app_CFE/
 ```
 
 Todos con estilos suaves y modernos usando **Bootstrap 5**.
-*(Puedo generarte los HTML si lo deseas en la siguiente parte).*
+*(Checar el final de las instrucciones para los archivos html).*
 
 ---
 
