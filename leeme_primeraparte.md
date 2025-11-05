@@ -362,11 +362,7 @@ http://127.0.0.1:8042/
 
 ---
 
-¿Quieres que ahora te genere los **archivos HTML completos** (base.html, navbar.html, inicio.html y los de sucursal) con los estilos y menús descritos?
-
-
-
-Excelente ✅ — a continuación te dejo **todos los archivos HTML completos** con diseño moderno, colores suaves y usando **Bootstrap 5**.
+A continuación te dejo **todos los archivos HTML completos** con diseño moderno, colores suaves y usando **Bootstrap 5**.
 Incluyen la estructura de navegación, pie de página, submenús y las páginas CRUD para **Sucursal**.
 *(No hay validación de datos, como pediste.)*
 
